@@ -19,3 +19,9 @@ books = Books.from_file(current_path + '/data/books/1.txt')
 
 puts film
 puts books
+
+begin
+  Product.from_file(current_path + '/data/books/1.txt')
+rescue NotImplementedError
+  puts "Для данного класса метод не реализован!"
+end
