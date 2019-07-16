@@ -8,13 +8,12 @@ class Product
    @price = parameters[:price]
   end
 
-  def from_file
-
+  def self.from_file(file_path)
+    raise NotImplementedError
   end
 
-
   def to_s
-    "Стоимисть #{@price}рублей, осталось #{balance} "
+    "Стоимисть #{@price}рублей, осталось #{@balance} "
   end
 
   def update(parameters)
@@ -22,7 +21,3 @@ class Product
     @price = parameters[:price] if parameters[:price]
   end
 end
-
-
-
-
