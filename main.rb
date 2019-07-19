@@ -12,16 +12,12 @@ end
 require_relative 'lib/product'
 require_relative 'lib/books'
 require_relative 'lib/film'
+require_relative 'lib/product_collection'
 
-current_path = File.dirname(__FILE__)
-film = Film.from_file(current_path + '/data/films/1.txt')
-books = Books.from_file(current_path + '/data/books/1.txt')
+collection = ProductCollection.from_dir(File.dirname(__FILE__) + '/data')
 
-puts film
-puts books
+collection.sort!(by: :price, order: :asc)
 
-begin
-  Product.from_file(current_path + '/data/books/1.txt')
-rescue NotImplementedError
-  puts "Для данного класса метод не реализован!"
+collection.to_a.each do |product|
+  puts product
 end
