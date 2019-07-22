@@ -3,11 +3,16 @@
 class ProductCollection
   PRODUCT_TYPES = {
     film: {dir: 'films', class: Film},
-    book: {dir: 'books', class: Books}
+    books: {dir: 'books', class: Books},
+    disc: {dir: 'discs', class: Disc}
   }
 
   def initialize(products = [])
     @products = products
+  end
+
+  def delete_zero
+    @products.reject! { |product| product.balance.zero? }
   end
 
   def self.from_dir(dir_path)
@@ -32,17 +37,13 @@ class ProductCollection
   end
 
   def sort!(parameters)
-
-    case parameters[:by]
-    when :title
-      @products.sort_by! { |product| product.to_s }
-    when :price
-      @products.sort_by! { |product| product.price }
-    when :balance
-      @products.sort_by! { |product| product.balance }
+    case parameters[:field]
+    when :title then @products.sort_by!(:title)
+    when :price then @products.sort_by!(:price)
+    when :balance then @products.sort_by!(:balance)
     end
 
-    @products.reverse! if parameters[:order] == :asc
+    @products.reverse! if parameters[:type] == :desc
 
     self
   end

@@ -12,11 +12,13 @@ end
 require_relative 'lib/product'
 require_relative 'lib/books'
 require_relative 'lib/film'
+require_relative 'lib/disc'
 require_relative 'lib/product_collection'
+
 
 collection = ProductCollection.from_dir(File.dirname(__FILE__) + '/data')
 
-collection.sort!(by: :price, order: :asc)
+collection.sort!(type: :desc)
 
 collection.to_a.each do |product|
   puts product
