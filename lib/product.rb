@@ -13,7 +13,7 @@ class Product
   end
 
   def to_s
-    "Стоимисть #{@price} рублей, осталось #{@balance}."
+    "Стоимисть #{@price} рублей, осталось #{@balance} шт."
   end
 
   def update(parameters)

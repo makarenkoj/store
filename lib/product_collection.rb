@@ -12,11 +12,7 @@ class ProductCollection
   end
 
   def delet_nil
-    @products.delete_if {|products| products.balance.nil? }
-  end
-
-  def include?(number)
-    (0..@products.size).include?(number)
+    @products.delete_if {|products| products.balance.zero? }
   end
 
   def self.from_dir(dir_path)

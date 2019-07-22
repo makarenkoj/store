@@ -18,18 +18,39 @@ require_relative 'lib/product_collection'
 
 collection = ProductCollection.from_dir(File.dirname(__FILE__) + '/data')
 
+puts "Программа Магазин."
+puts "Ознакомтесь с ассортимениом нашего магазина: "
+puts "\n"
+
 collection.sort!(by: :price, balance: :asc)
 
 basket = Basket.new
 
-puts collection
+loop do
+  collection.delet_nil
 
-choice = STDIN.gets.chomp.to_i
+  puts collection
+  puts
+  puts "Выберите понравившийся вам товар."
+  puts "Для выбора нажмите цифру соответствующую товару в списке."
+  puts
 
-input = collection.to_a[choice - 1]
+  choice = STDIN.gets.chomp.to_i
 
-basket.add(input)
+  break if choice == 0
 
+  input = collection.to_a[choice - 1]
+
+  basket.add(input)
+
+  input.balance -= 1
+
+  puts "У вас в корзине:\n#{basket}"
+  puts
+  puts "На сумму #{basket.check}"
+  puts
+end
+
+puts "Вы купили:\n#{basket}"
 puts
-puts "#{basket}"
-puts "#{basket.check}"
+puts "Потратив #{basket.check} р."
