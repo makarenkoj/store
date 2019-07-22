@@ -11,8 +11,12 @@ class ProductCollection
     @products = products
   end
 
-  def delete_zero
-    @products.reject! { |product| product.balance.zero? }
+  def delet_nil
+    @products.delete_if {|products| products.balance.nil? }
+  end
+
+  def include?(number)
+    (0..@products.size).include?(number)
   end
 
   def self.from_dir(dir_path)
@@ -37,14 +41,17 @@ class ProductCollection
   end
 
   def sort!(parameters)
-    case parameters[:field]
-    when :title then @products.sort_by!(:title)
-    when :price then @products.sort_by!(:price)
-    when :balance then @products.sort_by!(:balance)
+    case parameters[:by]
+    when :title then @products.sort_by!(&:to_s)
+    when :price then @products.sort_by!(&:price)
+    when :balance then @products.sort_by!(&:balance)
     end
 
-    @products.reverse! if parameters[:type] == :desc
-
+    @products.reverse! if parameters[:type] == :asc
     self
+  end
+
+  def to_s
+    @products.to_a.map.with_index(1) { |product, index| "#{index}. #{product}" }.join("\n")
   end
 end

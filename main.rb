@@ -10,16 +10,26 @@ if Gem.win_platform?
 end
 
 require_relative 'lib/product'
+require_relative 'lib/basket'
 require_relative 'lib/books'
 require_relative 'lib/film'
 require_relative 'lib/disc'
 require_relative 'lib/product_collection'
 
-
 collection = ProductCollection.from_dir(File.dirname(__FILE__) + '/data')
 
-collection.sort!(type: :desc)
+collection.sort!(by: :price, balance: :asc)
 
-collection.to_a.each do |product|
-  puts product
-end
+basket = Basket.new
+
+puts collection
+
+choice = STDIN.gets.chomp.to_i
+
+input = collection.to_a[choice - 1]
+
+basket.add(input)
+
+puts
+puts "#{basket}"
+puts "#{basket.check}"

@@ -4,8 +4,8 @@ class Product
   attr_accessor :balance, :price
 
   def initialize(parameters)
-   @balance = parameters[:balance]
-   @price = parameters[:price]
+   @balance = parameters[:balance].to_i
+   @price = parameters[:price].to_i
   end
 
   def self.from_file(file_path)
@@ -13,7 +13,7 @@ class Product
   end
 
   def to_s
-    "Стоимисть #{@price} рублей, осталось #{@balance} "
+    "Стоимисть #{@price} рублей, осталось #{@balance}."
   end
 
   def update(parameters)
