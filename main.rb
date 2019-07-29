@@ -43,7 +43,7 @@ loop do
 
   basket.add(input)
 
-  input.balance -= 1
+  basket.take_away(input)
 
   puts "У вас в корзине:\n#{basket}"
   puts
