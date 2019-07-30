@@ -43,8 +43,6 @@ loop do
 
   basket.add(input)
 
-  basket.take_away(input)
-
   puts "У вас в корзине:\n#{basket}"
   puts
   puts "На сумму #{basket.check}"

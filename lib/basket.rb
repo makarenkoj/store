@@ -8,10 +8,7 @@ class Basket
 
   def add(product)
     @products << product
-  end
-
-  def take_away(parametr)
-     parametr.balance -= 1
+    product.balance -= 1
   end
 
   def check
